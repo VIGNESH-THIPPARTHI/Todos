@@ -24,25 +24,25 @@ const DeleteButton = ({ onClick }) => (
 function TaskCard({ task, onToggle, onDelete, onEdit, onViewDetails }) {
   const getPriorityStyles = (priority) => {
     const styles = {
-      high: 'border-l-4 border-red-500 bg-red-50/80',    // Lighter red background
-      medium: 'border-l-4 border-amber-500 bg-amber-50/80', // Using amber for better yellow
-      low: 'border-l-4 border-emerald-500 bg-emerald-50/80' // Using emerald for better green
+      high: 'border-l-4 border-rose-500 bg-gradient-to-r from-rose-50 to-white',
+      medium: 'border-l-4 border-amber-500 bg-gradient-to-r from-amber-50 to-white',
+      low: 'border-l-4 border-emerald-500 bg-gradient-to-r from-emerald-50 to-white'
     };
     return styles[priority] || styles.medium;
   };
 
   const getPriorityBadgeStyles = (priority) => {
     const styles = {
-      high: 'bg-red-100 text-red-800 ring-1 ring-red-600/20',      // Darker text for better contrast
-      medium: 'bg-amber-100 text-amber-800 ring-1 ring-amber-600/20', // Amber for better yellow
-      low: 'bg-emerald-100 text-emerald-800 ring-1 ring-emerald-600/20' // Emerald for better green
+      high: 'bg-gradient-to-r from-rose-500 to-pink-500 text-white',
+      medium: 'bg-gradient-to-r from-amber-500 to-orange-500 text-white',
+      low: 'bg-gradient-to-r from-emerald-500 to-teal-500 text-white'
     };
     return styles[priority] || styles.medium;
   };
 
   return (
     <div 
-      className={`group bg-white/80 backdrop-blur-sm rounded-xl p-4 shadow-lg hover:shadow-xl transition-all duration-300 ${
+      className={`group bg-white/90 backdrop-blur-sm rounded-xl p-4 shadow-lg hover:shadow-xl transition-all duration-300 ${
         getPriorityStyles(task.priority)
       } ${task.completed ? 'opacity-75' : ''}`}
       onClick={() => onViewDetails(task)}
@@ -85,22 +85,22 @@ function TaskCard({ task, onToggle, onDelete, onEdit, onViewDetails }) {
           
           <div className="flex flex-wrap gap-2 mt-2">
             {task.dueDate && (
-              <span className="inline-flex items-center text-sm text-gray-600 shrink-0">
+              <span className="inline-flex items-center text-sm text-black-600 shrink-0">
                 <CalendarIcon />
                 {formatDate(task.dueDate)}
               </span>
             )}
             
             {task.category && (
-              <span className="px-3 py-1 text-sm rounded-full bg-gray-100 text-gray-700 truncate max-w-[200px]">
+              <span className="px-3 py-1 text-sm rounded-full bg-black-100 text-black-700 truncate max-w-[200px]">
                 {task.category}
               </span>
             )}
             
-            <span className={`px-3 py-1 text-sm font-medium rounded-full shrink-0 ${
+            <span className={`px-3 py-1 text-sm font-medium rounded-full shadow-sm shrink-0 ${
               getPriorityBadgeStyles(task.priority)
             }`}>
-              {task.priority.charAt(0).toUpperCase() + task.priority.slice(1)} Priority
+              {task.priority.charAt(0).toUpperCase() + task.priority.slice(1)}
             </span>
           </div>
         </div>
