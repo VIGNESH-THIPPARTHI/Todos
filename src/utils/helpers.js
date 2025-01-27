@@ -2,6 +2,12 @@ export const formatDate = (dateString) => {
   return new Date(dateString).toLocaleDateString();
 };
 
+const PRIORITY_ORDER = {
+  high: 1,
+  medium: 2,
+  low: 3
+};
+
 export const filterTasks = (tasks, filter, searchTerm) => {
   return tasks
     .filter(task => {
@@ -20,6 +26,14 @@ export const filterTasks = (tasks, filter, searchTerm) => {
         (task.category && task.category.toLowerCase().includes(searchLower)) ||
         formattedDueDate.includes(searchLower)
       );
+    })
+    .sort((a, b) => {
+      // First sort by priority
+      const priorityDiff = PRIORITY_ORDER[a.priority] - PRIORITY_ORDER[b.priority];
+      if (priorityDiff !== 0) return priorityDiff;
+      
+      // If same priority, sort by creation date (newest first)
+      return new Date(b.createdAt) - new Date(a.createdAt);
     });
 };
 
