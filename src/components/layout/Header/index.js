@@ -1,16 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { TASK_FILTERS } from '../../../utils/constants';
+import Pomodoro from '../../common/Pomodoro';
 
 function Header({ filter, setFilter, searchTerm, setSearchTerm }) {
+  const [showPomodoro, setShowPomodoro] = useState(false);
   const filterTypes = [TASK_FILTERS.ACTIVE, TASK_FILTERS.ALL, TASK_FILTERS.COMPLETED];
 
   return (
     <header className="space-y-6">
-      <div className="text-center">
+      <div className="text-center relative">
         <h1 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 mb-2">
-          Work Productivity
+          Todos
         </h1>
         <p className="text-gray-600">Stay organized, focused, and productive</p>
+        
+        <button
+          onClick={() => setShowPomodoro(true)}
+          className="absolute right-0 top-0 p-2 hover:bg-gray-100 rounded-lg transition-colors flex items-center gap-2 text-gray-600"
+          title="Open Pomodoro Timer"
+        >
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <span className="hidden sm:inline">Pomodoro</span>
+        </button>
       </div>
       
       <div className="space-y-4">
@@ -48,6 +61,49 @@ function Header({ filter, setFilter, searchTerm, setSearchTerm }) {
           ))}
         </div>
       </div>
+
+      {showPomodoro && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+          <div className="bg-white rounded-2xl max-w-md w-full shadow-2xl">
+            <div className="p-6 space-y-4">
+              <div className="flex justify-between items-start">
+                <h2 className="text-xl font-semibold text-gray-800 flex items-center gap-2">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  Pomodoro Timer
+                </h2>
+                <button 
+                  onClick={() => setShowPomodoro(false)}
+                  className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                >
+                  <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+              
+              <p className="text-sm text-gray-600">
+                Use the Pomodoro Technique to stay focused:
+                <br />
+                • Work for 25 minutes, Take a 5-minute break
+                <br />
+                • After 4 cycles, take a longer 15-minute break
+              </p>
+              
+              <Pomodoro 
+                onComplete={(currentMode) => {
+                  if (Notification.permission === 'granted') {
+                    new Notification('Pomodoro Timer', {
+                      body: `Time's up! ${currentMode === 'work' ? 'Take a break!' : 'Back to work!'}`,
+                    });
+                  }
+                }}
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </header>
   );
 }
