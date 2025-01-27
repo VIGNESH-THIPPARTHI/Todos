@@ -40,11 +40,30 @@ export function useTasks() {
     );
   };
 
+  const clearTasks = (status) => {
+    setTasks(currentTasks => {
+      if (status === 'completed') {
+        // Delete completed tasks
+        return currentTasks.filter(task => !task.completed);
+      } else if (status === 'active') {
+        // Delete active tasks
+        return currentTasks.filter(task => task.completed);
+      } else if (status === 'markAllCompleted') {
+        // Mark all active tasks as completed
+        return currentTasks.map(task => 
+          !task.completed ? { ...task, completed: true } : task
+        );
+      }
+      return currentTasks;
+    });
+  };
+
   return {
     tasks,
     addTask,
     toggleTask,
     deleteTask,
-    updateTask
+    updateTask,
+    clearTasks
   };
 } 

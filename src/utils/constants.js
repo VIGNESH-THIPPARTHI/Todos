@@ -5,10 +5,8 @@ export const PRIORITY_LEVELS = {
 };
 
 export const TASK_FILTERS = {
-  ALL: 'all',
   ACTIVE: 'active',
-  COMPLETED: 'completed',
-  DEFAULT: 'active'
+  COMPLETED: 'completed'
 };
 
 export const POMODORO_SETTINGS = {

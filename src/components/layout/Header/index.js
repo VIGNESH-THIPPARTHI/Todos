@@ -4,7 +4,7 @@ import Pomodoro from '../../common/Pomodoro';
 
 function Header({ filter, setFilter, searchTerm, setSearchTerm }) {
   const [showPomodoro, setShowPomodoro] = useState(false);
-  const filterTypes = [TASK_FILTERS.ACTIVE, TASK_FILTERS.ALL, TASK_FILTERS.COMPLETED];
+  const filterTypes = [TASK_FILTERS.ACTIVE, TASK_FILTERS.COMPLETED];
 
   return (
     <header className="space-y-6">

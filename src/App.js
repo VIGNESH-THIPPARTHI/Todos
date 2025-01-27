@@ -8,7 +8,7 @@ import { TASK_FILTERS } from './utils/constants';
 import TaskDetail from './components/tasks/TaskDetail';
 
 function App() {
-  const { tasks, addTask, toggleTask, deleteTask, updateTask } = useTasks();
+  const { tasks, addTask, toggleTask, deleteTask, updateTask, clearTasks } = useTasks();
   const [filter, setFilter] = useState(TASK_FILTERS.DEFAULT);
   const [searchTerm, setSearchTerm] = useState('');
   const [editingTask, setEditingTask] = useState(null);
@@ -46,6 +46,8 @@ function App() {
           onDeleteTask={deleteTask}
           onEditTask={handleEdit}
           onViewDetails={setSelectedTask}
+          onClearTasks={clearTasks}
+          filter={filter}
         />
       </div>
       
