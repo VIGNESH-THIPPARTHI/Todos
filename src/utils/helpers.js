@@ -9,10 +9,18 @@ export const filterTasks = (tasks, filter, searchTerm) => {
       if (filter === 'completed') return task.completed;
       return true;
     })
-    .filter(task => 
-      task.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      task.category.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    .filter(task => {
+      if (!searchTerm) return true;
+      
+      const searchLower = searchTerm.toLowerCase();
+      const formattedDueDate = task.dueDate ? formatDate(task.dueDate) : '';
+      
+      return (
+        task.title.toLowerCase().includes(searchLower) ||
+        (task.category && task.category.toLowerCase().includes(searchLower)) ||
+        formattedDueDate.includes(searchLower)
+      );
+    });
 };
 
 export const getTodayDate = () => {
