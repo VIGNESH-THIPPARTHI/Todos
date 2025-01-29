@@ -9,15 +9,21 @@ import TaskDetail from './components/tasks/TaskDetail';
 
 function App() {
   const { tasks, addTask, toggleTask, deleteTask, updateTask, clearTasks } = useTasks();
-  const [filter, setFilter] = useState(TASK_FILTERS.DEFAULT);
+  const [filter, setFilter] = useState(TASK_FILTERS.ACTIVE);
   const [searchTerm, setSearchTerm] = useState('');
   const [editingTask, setEditingTask] = useState(null);
   const [selectedTask, setSelectedTask] = useState(null);
+  const [showTaskForm, setShowTaskForm] = useState(true);
 
   const filteredTasks = filterTasks(tasks, filter, searchTerm);
 
+  const handleAddTask = (task) => {
+    addTask(task);
+  };
+
   const handleEdit = (task) => {
     setEditingTask(task);
+    setShowTaskForm(true);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -34,12 +40,19 @@ function App() {
           setFilter={setFilter}
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
+          onAddNewClick={() => setShowTaskForm(true)}
         />
-        <TaskForm 
-          onAddTask={addTask} 
-          editingTask={editingTask}
-          onUpdateTask={handleUpdate}
-        />
+        {showTaskForm && (
+          <TaskForm 
+            onAddTask={handleAddTask} 
+            editingTask={editingTask}
+            onUpdateTask={handleUpdate}
+            onClose={() => {
+              setShowTaskForm(false);
+              setEditingTask(null);
+            }}
+          />
+        )}
         <TaskList 
           tasks={filteredTasks}
           onToggleTask={toggleTask}

@@ -43,7 +43,6 @@ function TaskForm({ onAddTask, editingTask, onUpdateTask }) {
     setDueDate(getTodayDate());
     setPriority('');
     setCategory('');
-    setIsExpanded(false);
   };
 
   return (

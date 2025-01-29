@@ -39,5 +39,39 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    <script>
+      // Only enable restrictions in production
+      if (process.env.NODE_ENV === 'production') {
+        // Disable right-click
+        document.addEventListener('contextmenu', (e) => e.preventDefault());
+
+        // Disable keyboard shortcuts and dev tools
+        document.addEventListener('keydown', function(e) {
+          // Disable F12
+          if (e.keyCode == 123) {
+            e.preventDefault();
+            return false;
+          }
+          
+          // Disable Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
+          if (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 85)) {
+            e.preventDefault();
+            return false;
+          }
+        });
+
+        // Additional protection
+        setInterval(() => {
+          const devtools = /./;
+          devtools.toString = function() {
+            this.opened = true;
+          }
+          console.log('%c', devtools);
+        }, 1000);
+
+        // Clear console
+        console.clear();
+      }
+    </script>
   </body>
 </html>
