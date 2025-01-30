@@ -9,28 +9,19 @@ A modern, feature-rich task management application built with React and Tailwind
 - Set priority levels (High, Medium, Low)
 - Add categories and due dates
 - Mark tasks as complete/incomplete
-- Rich task descriptions
 - Bulk actions (clear completed, mark all as complete)
 
 ### 📂 Organization
 - Filter tasks by status (Active/Completed)
 - Search tasks by title, category, or date
-- Sort tasks by priority and creation date
 - Categorize tasks for better organization
 
 ### ⏳ Focus Timer
-- Built-in Pomodoro-style timer
+- Built-in Focus time
 - Customizable duration
 - Minimizable interface
 - Audio notifications
 - Desktop notifications (when permitted)
-
-### 🎨 Modern UI/UX
-- Clean, responsive design
-- Smooth animations and transitions
-- Intuitive task management
-- Priority-based visual indicators
-- Dark/light mode support
 
 ## 🛠️ Technology Stack
 - **Frontend**: React 19, TailwindCSS
@@ -88,7 +79,6 @@ The application includes several security measures in production:
 - Console logging restrictions
 - DevTools protection
 
-## 🤝 Contributing
 
 We welcome contributions! If you’d like to improve this project, follow these steps:
 
