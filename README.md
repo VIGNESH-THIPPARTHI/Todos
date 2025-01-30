@@ -87,3 +87,7 @@ We welcome contributions! If you’d like to improve this project, follow these 
 3. Commit your changes (`git commit -m 'Add new feature'`)
 4. Push to the branch (`git push origin feature-branch`)
 5. Open a Pull Request
+
+🌍 Deployment
+
+The application is deployed and can be accessed at:[Todos](https://ourtodos.vercel.app/)  
